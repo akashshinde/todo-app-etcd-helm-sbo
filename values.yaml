@@ -1,0 +1,31 @@
+# Default values for sbo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+namespace: olm
+
+image:
+  repository: quay.io/akashshinde/nodejs-todo
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+application:
+  group: apps
+  version: v1
+  resource: deployments
+  name: todo-app
+
+backend:
+  group: etcd.database.coreos.com
+  version: v1beta2
+  kind: EtcdCluster
+  name: etcd-cluster
+
+etcd:
+  size: 2
+
+sbo:
+  detectBindingResources: true
+

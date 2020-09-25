@@ -1,0 +1,17 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ServiceBinding
+metadata:
+  name: {{ .Release.Name }}-service-binding
+  namespace: {{ .Values.namespace }}
+spec:
+  application:
+    group: apps
+    version: v1
+    resource: deployments
+    name: {{ .Values.application.name }}
+  services:
+    - group: etcd.database.coreos.com
+      version: v1beta2
+      kind: EtcdCluster
+      name: {{ .Values.backend.name }}
+  detectBindingResources: {{ .Values.sbo.detectBindingResources }}
